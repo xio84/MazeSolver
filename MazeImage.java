@@ -75,4 +75,14 @@ public class MazeImage {
             System.out.println("error making image");
         }
     }
+
+    public void writeImage(String filename){
+        try {
+            f = new File(filename + ".png");
+            ImageIO.write(img, "png", f);
+        }
+        catch (IOException e){
+            System.out.println("error making image");
+        }
+    }
 }
