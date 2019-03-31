@@ -1,17 +1,19 @@
+package MazeSolver;
 
 /**Prototype maze
  * T. Antra Oksidian Tafly / 13517020
- * Timothy / 13517
+ * Timothy / 13517044
  */
 
-import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
+import java.lang.Math;
 
 /**
  * Maze
@@ -159,6 +161,7 @@ public class Maze {
                         }
                     }
                 }
+                data[x][y].h=Math.abs(end.pos.x-x)+Math.abs(end.pos.y-y);
             }
         }
     }
@@ -183,6 +186,46 @@ public class Maze {
                         c.visited = 'x';
                         Buffer.push(c);
                         Buffer2 = (Stack<Cell>) Buffer.clone();
+                        Q.offer(Buffer2);
+                        Buffer.pop();
+                    }
+                }
+            }
+            else{
+                System.out.println("Found!");
+                Q.offer(Buffer);
+            }
+        }
+        if (Buffer.contains(end)){ ///ketemu end
+            while(Buffer.size()>0){
+                pos = Buffer.pop();
+                pos.visited = 'v';
+            }
+        }
+        else{
+            System.out.println("Not Found!");
+        }
+    }
+
+    void ASTAR(){
+        Cell pos = start;
+        pos.visited = 'S';
+        PriorityQueue<Path> Q = new PriorityQueue<>();
+        Path Buffer = new Path();
+        Path Buffer2 = new Path();
+        Buffer.push(pos);
+        Q.offer(Buffer);
+        while (Q.size()>0 && !Buffer.contains(end)){
+            //System.out.println("Next!");
+            Buffer = Q.poll();
+            pos = Buffer.peek();
+            if (!pos.equals(end)){
+                for(Cell c : pos.Branch){
+                    if (!Buffer.contains(c)){
+                        //System.out.println(c.pos.y + "," + c.pos.x);
+                        c.visited = 'x';
+                        Buffer.push(c);
+                        Buffer2 = Buffer.copy();
                         Q.offer(Buffer2);
                         Buffer.pop();
                     }

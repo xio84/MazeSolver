@@ -1,3 +1,5 @@
+package MazeSolver;
+
 /**Prototype maze
  * T. Antra Oksidian Tafly / 13517020
  * Timothy / 13517
@@ -28,7 +30,7 @@ public class MazeImage {
     ///Koonstanta warna
     final Color white = new Color(255,255,255);
     final Color black = new Color(0,0,0);
-    final Color red = new Color(255,20,20);
+    final Color red = new Color(255,20,210);
     final Color green = new Color(20,255,80);
 
     MazeImage(Maze M){

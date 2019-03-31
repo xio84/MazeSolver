@@ -1,6 +1,8 @@
+package MazeSolver;
 
-/**
- * 
+/**Prototype FileProcessor
+ * T. Antra Oksidian Tafly / 13517020
+ * Timothy / 13517044
  */
 
 import java.io.BufferedWriter;
@@ -8,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileProcessor {
@@ -79,9 +80,6 @@ public class FileProcessor {
         File filename = new File(args);
 
         Scanner scan = null;
-
-        ///Size
-        int i,j;
 
         ///Buffers
         String sbuffer = new String();

@@ -1,17 +1,13 @@
+package MazeSolver;
+
 /**Prototype maze
  * T. Antra Oksidian Tafly / 13517020
  * Timothy / 13517
  */
 
 import java.awt.Point;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.Set;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
 
 
 /**
@@ -22,7 +18,7 @@ public class Cell {
     char visited;
     Set<Cell> Branch;
     Point pos;
-    int h; ///heuristic
+    int h; ///heuristic (Manhattan)
 
     public Cell(){
         wall=-1;
