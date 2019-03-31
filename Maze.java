@@ -1,27 +1,29 @@
+
 /**Prototype maze
  * T. Antra Oksidian Tafly / 13517020
  * Timothy / 13517
  */
 
+import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Maze
  */
 public class Maze {
-    int[][] wall;
-    char[][] visited; ///0=not visited, 1=visited, 2=path
+    Cell data[][];
     int n,m;
-    int xstart;
-    int ystart;
-    int xend;
-    int yend;
+    Cell start;
+    Cell end;
 
     Maze(String file){
-        xstart = -1; ystart = -1;
+        start = new Cell();
 
         File filename = new File(file);
 
@@ -52,20 +54,16 @@ public class Maze {
             n=i;
 
             ///Print to maze variable
-            wall = new int[i][j];
-            visited = new char[i][j];
+            data = new Cell[i][j];
             for(int x=0; x<i; x++){
                 for (int y=0; y<j; y++){
-                    wall[x][y] = Integer.parseInt(buffers.get(x)[y]);
-                    visited[x][y] = '0';
-                    if (((x==0||x==n-1)^(y==0||y==m)) && wall[x][y]==0){
-                        if (xstart==-1 && ystart==-1){
-                            xstart = x;
-                            ystart = y;
+                    data[x][y] = new Cell(Integer.parseInt(buffers.get(x)[y]),x,y);
+                    if (((x==0||x==n-1)^(y==0||y==m-1)) && data[x][y].wall==0){
+                        if (start.wall == -1){
+                            start = data[x][y];
                         }
                         else{
-                            xend=x;
-                            yend=y;
+                            end = data[x][y];
                         }
                     }
                 }
@@ -79,15 +77,130 @@ public class Maze {
     void print(){
         for(int x=0; x<n; x++){
             for (int y=0; y<m; y++){
-                if (wall[x][y] == 1){
-                    System.out.print(wall[x][y] + " ");
+                if (data[x][y].wall == 1){
+                    System.out.print(data[x][y].wall + " ");
                 }
                 else{
-                    System.out.print(visited[x][y] + " ");
+                    System.out.print(data[x][y].visited + " ");
                 }
             }
             System.out.print("\n");
         }
     }
+
+    void clear(){
+        for(int x=0; x<n; x++){
+            for (int y=0; y<m; y++){
+                data[x][y].visited = '0';
+            }
+        }
+    }
+
+    /*ArrayList<Point> Direction(Point pos){
+        int x = pos.x;
+        int y = pos.y;
+        ArrayList<Point> Buffer = new ArrayList<>();
+        Point p = new Point(x, y);
+        if (x>0){
+            if (wall[x-1][y]==0 && visited[x-1][y]=='0'){
+                p.setLocation(x-1, y);
+                Buffer.add(p);
+                visited[p.x][p.y]='v';
+            }
+        }
+        if (x<n-1){
+            if (wall[x+1][y]==0 && visited[x+1][y]=='0'){
+                p.setLocation(x+1, y);
+                Buffer.add(p);
+                visited[p.x][p.y]='v';
+            }
+        }
+        if (y>0){
+            if (wall[x][y-1]==0 && visited[x][y-1]=='0'){
+                p.setLocation(x, y-1);
+                Buffer.add(p);
+                visited[p.x][p.y]='v';
+            }
+        }
+        if (y<m-1){
+            if (wall[x][y+1]==0 && visited[x][y+1]=='0'){
+                p.setLocation(x, y+1);
+                Buffer.add(p);
+                visited[p.x][p.y]='v';
+            }
+        }
+        return Buffer;
+    }*/
+
+    void addDirections(){
+        for(int x=0; x<n; x++){
+            for (int y=0; y<m; y++){
+                if (data[x][y].wall == 1){
+                }
+                else{
+                    if (x>0){
+                        if (data[x-1][y].wall==0){
+                            data[x][y].AddB(data[x-1][y]);
+                        }
+                    }
+                    if (x<n-1){
+                        if (data[x+1][y].wall==0){
+                            data[x][y].AddB(data[x+1][y]);
+                        }
+                    }
+                    if (y>0){
+                        if (data[x][y-1].wall==0){
+                            data[x][y].AddB(data[x][y-1]);
+                        }
+                    }
+                    if (y<m-1){
+                        if (data[x][y+1].wall==0){
+                            data[x][y].AddB(data[x][y+1]);
+                        }
+                    }
+                }
+            }
+        }
+    }
     
+    @SuppressWarnings("unchecked")
+    void BFS(){
+        Cell pos = start;
+        pos.visited = 'S';
+        Queue<Stack<Cell>> Q = new LinkedList<Stack<Cell>>();
+        Stack<Cell> Buffer = new Stack<Cell>();
+        Stack<Cell> Buffer2 = new Stack<Cell>();
+        Buffer.push(pos);
+        Q.offer(Buffer);
+        while (Q.size()>0 && !Buffer.contains(end)){
+            //System.out.println("Next!");
+            Buffer = Q.poll();
+            pos = Buffer.peek();
+            if (!pos.equals(end)){
+                for(Cell c : pos.Branch){
+                    if (!Buffer.contains(c)){
+                        //System.out.println(c.pos.y + "," + c.pos.x);
+                        c.visited = 'x';
+                        Buffer.push(c);
+                        Buffer2 = (Stack<Cell>) Buffer.clone();
+                        Q.offer(Buffer2);
+                        Buffer.pop();
+                    }
+                }
+            }
+            else{
+                System.out.println("Found!");
+                Q.offer(Buffer);
+            }
+        }
+        if (Buffer.contains(end)){ ///ketemu end
+            while(Buffer.size()>0){
+                pos = Buffer.pop();
+                pos.visited = 'v';
+            }
+        }
+        else{
+            System.out.println("Not Found!");
+        }
+    }
 }
