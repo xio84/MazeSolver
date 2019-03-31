@@ -1,6 +1,4 @@
-//package MazeSolver;
-
-/**Prototype maze
+/**Prototype Maze
  * T. Antra Oksidian Tafly / 13517020
  * Timothy / 13517044
  */
@@ -98,42 +96,6 @@ public class Maze {
         }
     }
 
-    /*ArrayList<Point> Direction(Point pos){
-        int x = pos.x;
-        int y = pos.y;
-        ArrayList<Point> Buffer = new ArrayList<>();
-        Point p = new Point(x, y);
-        if (x>0){
-            if (wall[x-1][y]==0 && visited[x-1][y]=='0'){
-                p.setLocation(x-1, y);
-                Buffer.add(p);
-                visited[p.x][p.y]='v';
-            }
-        }
-        if (x<n-1){
-            if (wall[x+1][y]==0 && visited[x+1][y]=='0'){
-                p.setLocation(x+1, y);
-                Buffer.add(p);
-                visited[p.x][p.y]='v';
-            }
-        }
-        if (y>0){
-            if (wall[x][y-1]==0 && visited[x][y-1]=='0'){
-                p.setLocation(x, y-1);
-                Buffer.add(p);
-                visited[p.x][p.y]='v';
-            }
-        }
-        if (y<m-1){
-            if (wall[x][y+1]==0 && visited[x][y+1]=='0'){
-                p.setLocation(x, y+1);
-                Buffer.add(p);
-                visited[p.x][p.y]='v';
-            }
-        }
-        return Buffer;
-    }*/
-
     void addDirections(){
         for(int x=0; x<n; x++){
             for (int y=0; y<m; y++){
@@ -176,13 +138,11 @@ public class Maze {
         Buffer.push(pos);
         Q.offer(Buffer);
         while (Q.size()>0 && !Buffer.contains(end)){
-            //System.out.println("Next!");
             Buffer = Q.poll();
             pos = Buffer.peek();
             if (!pos.equals(end)){
                 for(Cell c : pos.Branch){
                     if (!Buffer.contains(c)){
-                        //System.out.println(c.pos.y + "," + c.pos.x);
                         c.visited = 'x';
                         Buffer.push(c);
                         Buffer2 = (Stack<Cell>) Buffer.clone();
@@ -213,17 +173,14 @@ public class Maze {
         PriorityQueue<Path> Q = new PriorityQueue<>();
         Path Buffer = new Path();
         Path Buffer2 = new Path();
-        System.out.println("Heuristic is Manhattan length (x+y)");
         Buffer.push(pos);
         Q.offer(Buffer);
         while (Q.size()>0 && !Buffer.contains(end)){
-            //System.out.println("Next!");
             Buffer = Q.poll();
             pos = Buffer.peek();
             if (!pos.equals(end)){
                 for(Cell c : pos.Branch){
                     if (!Buffer.contains(c)){
-                        //System.out.println(c.pos.y + "," + c.pos.x);
                         c.visited = 'x';
                         Buffer.push(c);
                         Buffer2 = Buffer.copy();
@@ -238,15 +195,10 @@ public class Maze {
             }
         }
         if (Buffer.contains(end)){ ///ketemu end
-            System.out.println("Cost of A-Star : " + Buffer.getF());
             while(Buffer.size()>0){
                 pos = Buffer.pop();
                 pos.visited = 'v';
             }
-            // while(Q.size()>0){
-            //     Buffer = Q.poll();
-            //     System.out.print(Buffer.getF() + " ");
-            // }
         }
         else{
             System.out.println("Not Found!");
