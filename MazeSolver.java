@@ -1,4 +1,4 @@
-package MazeSolver;
+//package MazeSolver;
 
 /**Prototype maze
  * T. Antra Oksidian Tafly / 13517020
@@ -16,7 +16,7 @@ public class MazeSolver {
         Maze M;
         MazeImage I;
         if (args.length > 0){
-            args[0] = "MazeSolver/" + args[0];
+            args[0] = args[0];
             System.out.println("Process file? [Y]es/[N]o");
             Scanner s = new Scanner(System.in);
             if (s.nextLine().startsWith("Y")){
@@ -41,7 +41,6 @@ public class MazeSolver {
             System.out.println("Masukkan nama file:");
             Scanner s = new Scanner(System.in);
             String buffer = s.nextLine();
-            buffer = "MazeSolver/" + buffer;
             System.out.println("Process file? [Y]es/[N]o");
             Scanner sx = new Scanner(System.in);
             if (sx.nextLine().startsWith("Y")){

@@ -1,4 +1,4 @@
-package MazeSolver;
+//package MazeSolver;
 
 /**Prototype maze
  * T. Antra Oksidian Tafly / 13517020

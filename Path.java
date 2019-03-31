@@ -1,4 +1,4 @@
-package MazeSolver;
+//package MazeSolver;
 
 import java.util.Objects;
 import java.util.Stack;
