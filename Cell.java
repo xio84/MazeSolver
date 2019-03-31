@@ -1,14 +1,11 @@
-//package MazeSolver;
-
-/**Prototype maze
+/**Prototype Cell
  * T. Antra Oksidian Tafly / 13517020
- * Timothy / 13517
+ * Timothy / 13517044
  */
 
 import java.awt.Point;
 import java.util.Set;
 import java.util.HashSet;
-
 
 /**
  * Cell

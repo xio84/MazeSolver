@@ -1,12 +1,10 @@
-//package MazeSolver;
-
-import java.util.Objects;
-import java.util.Stack;
-
 /**Prototype Path
  * T. Antra Oksidian Tafly / 13517020
  * Timothy / 13517044
  */
+
+import java.util.Objects;
+import java.util.Stack;
 
  /**
   * Path

@@ -1,8 +1,6 @@
-//package MazeSolver;
-
-/**Prototype maze
+/**Prototype MazeImage
  * T. Antra Oksidian Tafly / 13517020
- * Timothy / 13517
+ * Timothy / 13517044
  */
 
 import java.io.File;
@@ -12,7 +10,7 @@ import javax.imageio.ImageIO;
 import java.awt.Color;
 
 /**
- * Maze
+ * MazeImage
  */
 public class MazeImage {
     ///Dimension
