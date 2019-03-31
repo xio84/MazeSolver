@@ -27,13 +27,13 @@ public class MazeSolver {
             M.addDirections();
             M.BFS();
             //System.out.println(M.data[1][5].Branch.size());
-            M.print();
+            //M.print();
             I = new MazeImage(M);
             I.writeImage("BFS");
             M.clear();
             M.ASTAR();
             //System.out.println(M.data[1][5].Branch.size());
-            M.print();
+            //M.print();
             I = new MazeImage(M);
             I.writeImage("A-STAR");
         }
@@ -52,13 +52,13 @@ public class MazeSolver {
             M.addDirections();
             M.BFS();
             //System.out.println(M.data[1][5].Branch.size());
-            M.print();
+            //M.print();
             I = new MazeImage(M);
             I.writeImage("BFS");
             M.clear();
             M.ASTAR();
             //System.out.println(M.data[1][5].Branch.size());
-            M.print();
+            //M.print();
             I = new MazeImage(M);
             I.writeImage("A-STAR");
         }

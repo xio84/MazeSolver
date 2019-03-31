@@ -213,6 +213,7 @@ public class Maze {
         PriorityQueue<Path> Q = new PriorityQueue<>();
         Path Buffer = new Path();
         Path Buffer2 = new Path();
+        System.out.println("Heuristic is Manhattan length (x+y)");
         Buffer.push(pos);
         Q.offer(Buffer);
         while (Q.size()>0 && !Buffer.contains(end)){
@@ -237,10 +238,15 @@ public class Maze {
             }
         }
         if (Buffer.contains(end)){ ///ketemu end
+            System.out.println("Cost of A-Star : " + Buffer.getF());
             while(Buffer.size()>0){
                 pos = Buffer.pop();
                 pos.visited = 'v';
             }
+            // while(Q.size()>0){
+            //     Buffer = Q.poll();
+            //     System.out.print(Buffer.getF() + " ");
+            // }
         }
         else{
             System.out.println("Not Found!");
